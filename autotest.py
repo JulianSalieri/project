@@ -19,22 +19,22 @@ choice_account.click()
 time.sleep(3)
 
 first_name = driver.find_element_by_css_selector("#firstName")
-first_name.send_keys('Денис')
+first_name.send_keys(setting.MY_NAME)
 time.sleep(1)
 
 last_name = driver.find_element_by_css_selector("#lastName")
 last_name.click()
-last_name.send_keys('Щербаков')
+last_name.send_keys(setting.MY_LAST_NAME)
 time.sleep(1)
 
 user_name = driver.find_element_by_css_selector('#username')
-user_name.send_keys('dsdfsdfsdfsd123123')
+user_name.send_keys(setting.MAIL_NAME)
 
 user_password = driver.find_element_by_name('Passwd')
-user_password.send_keys('!@#$%1234QWERTy')
+user_password.send_keys(setting.MAIL_PASS)
 
 user_password_return = driver.find_element_by_name('ConfirmPasswd')
-user_password_return.send_keys('!@#$%1234QWERTy')
+user_password_return.send_keys(setting.MAIL_PASS)
 time.sleep(3)
 
 next_registration = driver.find_element_by_class_name("CwaK9")
@@ -54,13 +54,13 @@ next_registration.click()
 time.sleep(4)
 
 day = driver.find_element_by_css_selector('#day')
-day.send_keys('15')
+day.send_keys(setting.MY_DAY)
 
 select = Select(driver.find_element_by_tag_name('select'))
-select.select_by_value('10')
+select.select_by_value(setting.MY_MOUNTH)
 
 year = driver.find_element_by_css_selector('#year')
-year.send_keys('15')
+year.send_keys(setting.MY_YEAR)
 
 gender = driver.find_element_by_css_selector('#gender').click()
 gender.select_by_value('2')
