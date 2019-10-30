@@ -8,7 +8,7 @@ import logging
 
 logging.basicConfig(format='%(asctime)s - %(levelname)s - %(message)s',
                     level=logging.INFO,
-                    filename='autotestlog.log',
+                    filename='autotestlogneg.log',
                     filemode="w")
 
 options = Options()
@@ -67,7 +67,7 @@ def choice_account():
         logging.info(u'Шаг3: Выбор типа акаунта для регистрации ')
         time.sleep(3)
         if True:
-            first_name()
+            next_registration1()
         else:
             driver.save_screenshot('screenie.png')
     except NoSuchElementException:
@@ -76,14 +76,42 @@ def choice_account():
         driver.quit()
 
 
-# ВВОД ИМЕНИ
+def next_registration1():
+    try:
+        next_registration = driver.find_element_by_class_name("CwaK9")
+        next_registration.click()
+        logging.info(u'Шаг7: Переход на следующий шаг')
+        time.sleep(3)
+        a = 0
+        while a != 1:
+            if driver.find_element_by_class_name('GQ8Pzc'):
+                logging.error(u'!!!Element not founddsds!!!!22')
+                if driver.find_element_by_xpath('//div[text()="Укажите имя"]'):
+                    logging.error(u'Укажите имя')
+                    if driver.find_element_by_xpath('//div[text()="Укажите фамилию"]'):
+                        logging.error(u'Укажите фамилию')
+                        if driver.find_element_by_xpath('//div[text()="Укажите адрес Gmail"]'):
+                            logging.error(u'!Укажите адрес Gmail')
+                            if driver.find_element_by_xpath('//div[text()="Введите пароль"]'):
+                                logging.error(u'Введите пароль')
+                                if True:
+                                    a += 1
+                                    logging.error(u'STOP')
+                                    first_name()
+
+    except NoSuchElementException:
+        logging.error(u'Element not found')
+        driver.save_screenshot('notfound_7.png')
+        driver.quit()
+
+
 def first_name():
     try:
         first_name = driver.find_element_by_css_selector("#firstName")
         first_name.click()
         first_name.send_keys(setting.MY_NAME)
         logging.info(u'Шаг4: Ввод имени пользователя')
-        time.sleep(3)
+        time.sleep(2)
         if True:
             last_name()
         else:
@@ -94,14 +122,13 @@ def first_name():
         driver.quit()
 
 
-# ВВОД ФАМИЛИИ
 def last_name():
     try:
         last_name = driver.find_element_by_css_selector("#lastName")
         last_name.click()
         last_name.send_keys(setting.MY_LAST_NAME)
         logging.info(u'Шаг4: Ввод фамилии пользователя')
-        time.sleep(3)
+        time.sleep(1)
         if True:
             user_name()
         else:
@@ -112,13 +139,12 @@ def last_name():
         driver.quit()
 
 
-# АДРЕС ПОЧТЫ
 def user_name():
     try:
         user_name = driver.find_element_by_css_selector('#username')
         user_name.send_keys(setting.MAIL_NAME)
         logging.info(u'Шаг5: Ввод адрес почты')
-        time.sleep(3)
+        time.sleep(2)
         if True:
             user_password()
         else:
@@ -129,13 +155,12 @@ def user_name():
         driver.quit()
 
 
-# ПАРОЛЬ
 def user_password():
     try:
         user_password = driver.find_element_by_name('Passwd')
         user_password.send_keys(setting.MAIL_PASS)
         logging.info(u'Шаг6: Ввод пароля пользователя')
-        time.sleep(3)
+        time.sleep(2)
         if True:
             user_password_return()
         else:
@@ -146,7 +171,6 @@ def user_password():
         driver.quit()
 
 
-# ПОВТОРЕНИЕ ПАРОЛЯ
 def user_password_return():
     try:
         user_password_return = driver.find_element_by_name('ConfirmPasswd')
@@ -164,6 +188,8 @@ def user_password_return():
 
 
 # КНОПКА ДАЛЕЕ
+
+
 def next_registration():
     try:
         next_registration = driver.find_element_by_class_name("CwaK9")
@@ -171,7 +197,7 @@ def next_registration():
         logging.info(u'Шаг7: Переход на следующий шаг')
         time.sleep(3)
         if True:
-            user_number()
+            driver.find_element_by_xpath('//div[text()="Имя пользователя должно содержать от 6 до 30 символов."]')
         else:
             driver.save_screenshot('screenie_7.png')
     except NoSuchElementException:
@@ -180,145 +206,6 @@ def next_registration():
         driver.quit()
 
 
-# ВВОД НОМЕРА ТЕЛЕФОНА
-def user_number():
-    try:
-        user_number = driver.find_element_by_css_selector('#phoneNumberId')
-        user_number.send_keys(setting.MY_NUMBER)
-        logging.info(u'Шаг8: Ввод номера телефона')
-        time.sleep(3)
-        if True:
-            next_registration_two_step()
-        else:
-            driver.save_screenshot('screenie_8.png')
-    except NoSuchElementException:
-        logging.error(u'Element not found')
-        driver.save_screenshot('notfound_8.png')
-        driver.quit()
-
-
-# НАЖАТИЕ НА КНОПКУ ДАЛЕЕ ПОСЛЕ ВВОДА НОМЕРА ТЕЛЕФОНА
-def next_registration_two_step():
-    try:
-        next_registration_two_step = driver.find_element_by_class_name("CwaK9")
-        next_registration_two_step.click()
-        logging.info(u'Шаг9: Переход к форме ввода смс кода')
-        time.sleep(5)
-        if True:
-            d = driver.find_element_by_xpath('//div[text()="Этот номер нельзя использовать для подтверждения ID."]') #or driver.find_element_by_xpath('//div[text()="Этот телефонный номер был использован слишком много раз."]')
-            driver.save_screenshot('screenie_919.png') and driver.quit()
-            logging.error(u'Ошибка при вводе номера телефона')
-        else:
-            next_registration_three()
-    except NoSuchElementException:
-        logging.error(u'Element not found')
-        driver.save_screenshot('notfound_9.png')
-        #driver.quit()
-
-
-# НАЖАТИЕ НА КНОПКУ ДАЛЕЕ ПОСЛЕ ВВОДА КОДА ИЗ СМС
-def next_registration_three():
-    try:
-        next_registration_three = driver.find_element_by_class_name("CwaK9")
-        next_registration_three.click()
-        logging.info(u'Шаг10: Подтверждение смс кода')
-        time.sleep(3)
-        if True:
-            next_registration_two_step()
-        else:
-            driver.save_screenshot('screenie_10.png')
-    except NoSuchElementException:
-        logging.error(u'Element not found')
-        driver.save_screenshot('notfound_10.png')
-        driver.quit()
-
-
-def day():
-    try:
-        day = driver.find_element_by_css_selector('#day')
-        day.send_keys(setting.MY_DAY)
-        logging.info(u'Шаг11: Ввод даты рождения')
-        time.sleep(1)
-        if True:
-            select()
-        else:
-            driver.save_screenshot('screenie_11.png')
-    except NoSuchElementException:
-        logging.error(u'Element not found')
-        driver.save_screenshot('notfound_11.png')
-        driver.quit()
-
-
-def select():
-    try:
-        select = Select(driver.find_element_by_tag_name('select'))
-        select.select_by_value(setting.MY_MOUNTH)
-        logging.info(u'Шаг12: Ввод месяца рождения')
-        time.sleep(1)
-        if True:
-            year()
-        else:
-            driver.save_screenshot('screenie_12.png')
-    except NoSuchElementException:
-        logging.error(u'Element not found')
-        driver.save_screenshot('notfound_12.png')
-        driver.quit()
-
-
-def year():
-    try:
-        year = driver.find_element_by_css_selector('#year')
-        year.send_keys(setting.MY_YEAR)
-        logging.info(u'Шаг13: Ввод года рождения')
-        time.sleep(1)
-        if True:
-            gender()
-        else:
-            driver.save_screenshot('screenie_13.png')
-    except NoSuchElementException:
-        logging.error(u'Element not found')
-        driver.save_screenshot('notfound_13.png')
-        driver.quit()
-
-
-def gender():
-    try:
-        gender = driver.find_element_by_css_selector('#gender>option:nth-child(3)').click()
-        logging.info(u'Шаг13: Выбор пола')
-        time.sleep(1)
-        if True:
-            next_registration_four()
-        else:
-            driver.save_screenshot('screenie_14.png')
-    except NoSuchElementException:
-        logging.error(u'Element not found')
-        driver.save_screenshot('notfound_14.png')
-        driver.quit()
-
-
-def next_registration_four():
-    try:
-        next_registration_four = driver.find_element_by_class_name("RveJvd.snByac").click()
-        logging.info(u'Шаг15: Переход к следующей форме завершения регистрации')
-        time.sleep(10)
-        if True:
-            next_registration_four = driver.find_element_by_class_name("RveJvd.snByac").click()
-            logging.info(u'Шаг16: Завершение регистрации')
-        else:
-            driver.save_screenshot('screenie_15.png')
-    except NoSuchElementException:
-        logging.error(u'Element not found')
-        driver.save_screenshot('notfound_15.png')
-        driver.quit()
-
-
 creat_account()
 
-# with open('autotestlog.log', 'a', encoding='utf-8') as f:
-# f.write(str(gthsdq) + '\n' + str(choice_account) + '\n')
-
-#    scr = 'screenie'+ 'i' +'.png'
-#    screen =  driver.save_screenshot('screenie.png')
-
-
-# class="RveJvd snByac
+# Имя пользователя должно содержать от 6 до 30 символов.
