@@ -39,8 +39,7 @@ email.send_keys('Hello')
 logging.info(u'Шаг1: Ввод приветсвия')
 
 
-# Этот телефонный номер был использован слишком много раз.
-# QWERTYa12345
+
 # Регистрации почты
 def creat_account():
     try:
@@ -205,7 +204,7 @@ def next_registration_two_step():
         logging.info(u'Шаг9: Переход к форме ввода смс кода')
         time.sleep(5)
         if True:
-            d = driver.find_element_by_xpath('//div[text()="Этот номер нельзя использовать для подтверждения ID."]') #or driver.find_element_by_xpath('//div[text()="Этот телефонный номер был использован слишком много раз."]')
+            driver.find_element_by_xpath('//div[text()="Этот номер нельзя использовать для подтверждения ID."]') #or driver.find_element_by_xpath('//div[text()="Этот телефонный номер был использован слишком много раз."]')
             driver.save_screenshot('screenie_919.png') and driver.quit()
             logging.error(u'Ошибка при вводе номера телефона')
         else:
@@ -314,11 +313,5 @@ def next_registration_four():
 
 creat_account()
 
-# with open('autotestlog.log', 'a', encoding='utf-8') as f:
-# f.write(str(gthsdq) + '\n' + str(choice_account) + '\n')
-
-#    scr = 'screenie'+ 'i' +'.png'
-#    screen =  driver.save_screenshot('screenie.png')
 
 
-# class="RveJvd snByac
